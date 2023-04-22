@@ -8,7 +8,7 @@
     "clean": "rimraf playwright-report target test-results",
     "test": "npm run clean && npm run test:execute && npm run test:report",
     "test:execute": "npm run clean && npx playwright test",
-    "test:report": "npx serenity-bdd run && npx playwright show-report target/site/serenity -s -o"
+    "test:report": "npx serenity-bdd run && npx playwright show-report target/site/serenity"
   },
   "keywords": [],
   "author": "Diego Cortes <Diego Alejandro Cortes Roa>",

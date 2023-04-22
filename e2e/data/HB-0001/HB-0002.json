@@ -1,0 +1,15 @@
+{
+  "testCase": "HB-0002",
+  "testSummary": "Add Record in Web Table",
+  "testDescription": "Add Record in Web Table",
+  "actor": "User Actor",
+  "tags": "@regression @sprint1 @hb-0001 @hb-0002",
+  "recordInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@example.com",
+    "age": "18",
+    "department": "administrator",
+    "salary": "1500"
+  }
+}
