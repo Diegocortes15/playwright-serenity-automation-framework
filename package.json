@@ -1,0 +1,28 @@
+{
+  "name": "habi-automation-challenge",
+  "version": "1.0.0",
+  "description": "Habi Automation Challenge",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "serenity-bdd update",
+    "clean": "rimraf playwright-report target test-results",
+    "test": "npm run clean && npm run test:execute && npm run test:report",
+    "test:execute": "npm run clean && npx playwright test",
+    "test:report": "npx serenity-bdd run && npx playwright show-report target/site/serenity -s -o"
+  },
+  "keywords": [],
+  "author": "Diego Cortes <Diego Alejandro Cortes Roa>",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.32.3",
+    "@serenity-js/assertions": "^3.1.6",
+    "@serenity-js/console-reporter": "^3.1.6",
+    "@serenity-js/core": "^3.1.6",
+    "@serenity-js/playwright": "^3.1.6",
+    "@serenity-js/playwright-test": "^3.1.6",
+    "@serenity-js/serenity-bdd": "^3.1.6",
+    "@serenity-js/web": "^3.1.6",
+    "fs": "^0.0.1-security",
+    "playwright": "^1.32.3"
+  }
+}
