@@ -30,6 +30,10 @@ Then, install the project dependencies using npm:
 npm install
 ```
 
+Project overview
+
+![hbautomationOverview](https://user-images.githubusercontent.com/60171460/233871320-1767dece-7430-476b-9ffa-c9b553a29fa3.PNG)
+
 Run, the following command to set some depencies needed after install like `rimraf` is a Node.js package that provides a cross-platform command line interface (CLI) for deleting files and directories.
 
 ```bash
@@ -43,6 +47,9 @@ To run all tests and open serenity report
 ```bash
 npm run test
 ```
+At the end, will be generated a serenity report like this
+
+![serenityReport](https://user-images.githubusercontent.com/60171460/233871291-4bc7ae00-3230-4472-887b-483e662eb037.gif)
 
 To run all tests without open serenity test:execute
 
@@ -63,7 +70,7 @@ npm run clean
 ```
 
 > **Note**
-> If you are using _`npm run test:execute`_ or _`npm run test`_, this command is required.
+> If you are using `npm run test:execute` or `npm run test`, this command is not required.
 
 To run test cases by tags
 
