@@ -2,7 +2,7 @@
   "testCase": "HB-0002",
   "testSummary": "Add Record in Web Table",
   "testDescription": "Add Record in Web Table",
-  "actor": "User Actor",
+  "actor": "Web Table User",
   "tags": "@regression @sprint1 @hb-0001 @hb-0002",
   "recordInfo": {
     "firstName": "John",

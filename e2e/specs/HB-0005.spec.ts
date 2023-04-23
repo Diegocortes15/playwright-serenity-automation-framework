@@ -13,6 +13,7 @@ import {
   getRandomDate,
   getRandomDateTime,
 } from "../utils/support-factory.utils";
+import { actorInTheSpotlight } from "@serenity-js/core";
 
 describe("Date Picker Widget", () => {
   const storyParentId = "HB-0005";
@@ -22,18 +23,19 @@ describe("Date Picker Widget", () => {
   );
   it(`Test case: ${testDataTestCase_1["testCase"]} |
   Description: ${testDataTestCase_1["testDescription"]} |
-  Tags: ${testDataTestCase_1["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_1["tags"]}`, async ({actorCalled}) => {
+    const data = await testDataTestCase_1;
     const dateFormat = "MM/DD/YYYY";
     const dateData = await getRandomDate(dateFormat);
     const expectedDate = dateData.fullDate;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToWidgetsCard(),
       taskGoToDatePickerTab(),
       taskSelectDate(dateData)
     );
-    const currentDate = await questionDate().answeredBy(actor);
-    await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
+    const currentDate = await questionDate().answeredBy(actorInTheSpotlight());
+    await actorCalled(data.actor).attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
   });
 
   const testDataTestCase_2 = JSON.parse(
@@ -41,17 +43,18 @@ describe("Date Picker Widget", () => {
   );
   it(`Test case: ${testDataTestCase_2["testCase"]} |
   Description: ${testDataTestCase_2["testDescription"]} |
-  Tags: ${testDataTestCase_2["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_2["tags"]}`, async ({actorCalled}) => {
+    const data = await testDataTestCase_2;
     const dateFormat = "LLL";
     const dateDataTime = await getRandomDateTime(dateFormat);
     const expectedDate = dateDataTime.fullDate;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToWidgetsCard(),
       taskGoToDatePickerTab(),
       taskSelectDateTime(dateDataTime)
     );
-    const currentDate = await questionDateTime().answeredBy(actor);
-    await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
+    const currentDate = await questionDateTime().answeredBy(actorInTheSpotlight());
+    await actorCalled(data.actor).attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
   });
 });

@@ -2,6 +2,6 @@
   "testCase": "HB-0003",
   "testSummary": "Delete Record in Web Table",
   "testDescription": "Delete Record in Web Table",
-  "actor": "User Actor",
+  "actor": "Web Table User",
   "tags": "@regression @sprint1 @hb-0001 @hb-0003"
 }

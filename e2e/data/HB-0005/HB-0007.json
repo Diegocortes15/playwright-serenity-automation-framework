@@ -2,6 +2,6 @@
   "testCase": "HB-0007",
   "testSummary": "Verify selects a date from a date time picker",
   "testDescription": "Verify selects a date from a date time picker",
-  "actor": "User Actor",
+  "actor": "Date Time Picker User",
   "tags": "@regression @sprint2 @hb-0005 @hb-0007"
 }

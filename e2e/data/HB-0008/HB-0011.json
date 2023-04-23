@@ -2,8 +2,8 @@
   "testCase": "HB-0011",
   "testSummary": "Verify alert selects Cancel",
   "testDescription": "Verify alert selects Cancel",
-  "actor": "User Actor",
-  "tags": "@regression @sprint2 @hb-0008 @hb-0011",
+  "actor": "modalDialog User",
+  "tags": "@regression @sprint1 @hb-0008 @hb-0011",
   "modalDialog": {
     "option": "Cancel",
     "message": "You selected Cancel"
