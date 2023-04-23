@@ -7,12 +7,11 @@ import {
   taskSelectDate,
   taskSelectDateTime,
 } from "../tasks";
-import {persistedDate, persistedDateTime} from "../questions";
+import {questionDate, questionDateTime} from "../questions";
 import {readFileSync} from "fs";
 import {
   getRandomDate,
   getRandomDateTime,
-  getRandomPositiveNumber,
 } from "../utils/support-factory.utils";
 
 describe("Date Picker Widget", () => {
@@ -33,7 +32,7 @@ describe("Date Picker Widget", () => {
       taskGoToDatePickerTab(),
       taskSelectDate(dateData)
     );
-    const currentDate = await persistedDate().answeredBy(actor);
+    const currentDate = await questionDate().answeredBy(actor);
     await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
   });
 
@@ -52,7 +51,7 @@ describe("Date Picker Widget", () => {
       taskGoToDatePickerTab(),
       taskSelectDateTime(dateDataTime)
     );
-    const currentDate = await persistedDateTime().answeredBy(actor);
+    const currentDate = await questionDateTime().answeredBy(actor);
     await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
   });
 });

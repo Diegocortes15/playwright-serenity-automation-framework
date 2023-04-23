@@ -3,11 +3,11 @@ import {Navigate} from "@serenity-js/web";
 import {contain, Ensure, not} from "@serenity-js/assertions";
 import {
   addRecordTask,
-  goToElementsCardTask,
-  goToWebTablesTabTask,
+  taskGoToElementsCard,
+  taskGoToWebTablesTab,
   taskRemoveRecord,
 } from "../tasks";
-import {persistedNameRecordById, persistedNameRecords} from "../questions";
+import {questionNameRecordById, questionNameRecords} from "../questions";
 import {readFileSync} from "fs";
 import {getRandomPositiveNumber} from "../utils/support-factory.utils";
 
@@ -23,10 +23,10 @@ describe("Manage Web Tables", () => {
     const data = await testDataTestCase_1;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsCardTask(),
-      goToWebTablesTabTask(),
+      taskGoToElementsCard(),
+      taskGoToWebTablesTab(),
       addRecordTask(data.recordInfo),
-      Ensure.that(persistedNameRecords(), contain(data.recordInfo.firstName))
+      Ensure.that(questionNameRecords(), contain(data.recordInfo.firstName))
     );
   });
 
@@ -36,21 +36,20 @@ describe("Manage Web Tables", () => {
   it(`Test case: ${testDataTestCase_2["testCase"]} |
   Description: ${testDataTestCase_2["testDescription"]} |
   Tags: ${testDataTestCase_2["tags"]}`, async ({actor}) => {
-    const data = await testDataTestCase_2;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsCardTask(),
-      goToWebTablesTabTask()
+      taskGoToElementsCard(),
+      taskGoToWebTablesTab()
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
-      await persistedNameRecords().length.answeredBy(actor)
+      await questionNameRecords().length.answeredBy(actor)
     );
-    const recordName = await persistedNameRecordById(
+    const recordName = await questionNameRecordById(
       recordIdToRemoveBy
     ).answeredBy(actor);
     await actor.attemptsTo(
       taskRemoveRecord(recordIdToRemoveBy),
-      Ensure.that(persistedNameRecords(), not(contain(recordName)))
+      Ensure.that(questionNameRecords(), not(contain(recordName)))
     );
   });
 
@@ -63,20 +62,20 @@ describe("Manage Web Tables", () => {
     const data = await testDataTestCase_3;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsCardTask(),
-      goToWebTablesTabTask(),
+      taskGoToElementsCard(),
+      taskGoToWebTablesTab(),
       addRecordTask(data.recordInfo),
-      Ensure.that(persistedNameRecords(), contain(data.recordInfo.firstName))
+      Ensure.that(questionNameRecords(), contain(data.recordInfo.firstName))
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
-      await persistedNameRecords().length.answeredBy(actor)
+      await questionNameRecords().length.answeredBy(actor)
     );
-    const recordName = await persistedNameRecordById(
+    const recordName = await questionNameRecordById(
       recordIdToRemoveBy
     ).answeredBy(actor);
     await actor.attemptsTo(
       taskRemoveRecord(recordIdToRemoveBy),
-      Ensure.that(persistedNameRecords(), not(contain(recordName)))
+      Ensure.that(questionNameRecords(), not(contain(recordName)))
     );
   });
 });
