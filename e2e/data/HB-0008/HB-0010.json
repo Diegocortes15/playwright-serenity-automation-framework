@@ -1,0 +1,10 @@
+{
+  "testCase": "HB-0010",
+  "testSummary": "Verify alert appeared after 5 seconds",
+  "testDescription": "Verify alert appeared after 5 seconds",
+  "actor": "User Actor",
+  "tags": "@regression @sprint2 @hb-0008 @hb-0010",
+  "modalDialog": {
+    "message": "This alert appeared after 5 seconds"
+  }
+}

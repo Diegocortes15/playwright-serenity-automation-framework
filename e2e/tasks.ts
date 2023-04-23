@@ -1,7 +1,11 @@
-import {Answerable, Task} from "@serenity-js/core";
-import {Click, Enter, Select} from "@serenity-js/web";
+import {Answerable, Task, Wait} from "@serenity-js/core";
+import {Click, Enter, ModalDialog, Select} from "@serenity-js/web";
 import {webTablesTab} from "./screens/elements.screen";
-import {cardElements, cardWidgets} from "./screens/home.screen";
+import {
+  cardAlertFrameWindows,
+  cardElements,
+  cardWidgets,
+} from "./screens/home.screen";
 import {
   buttonSubmit,
   inputAge,
@@ -29,16 +33,25 @@ import {
 import {
   interactionSelectDateTimeMonth,
   interactionSelectDateTimeYear,
+  interactionSelectModalDialog,
 } from "./interactions";
 import {
   selectDateTimeDay,
   selectDateTimeTime,
 } from "./screens/calendarSelectDateTime.screen";
+import {alertsTab} from "./screens/alertsFrameWindow.screen";
+import {
+  buttonConfirmModalDialog,
+  buttonPromptModalDialog,
+  buttonSeeModalDialog,
+  buttonTimerModalDialog,
+} from "./screens/alerts.screen";
+import {isPresent} from "@serenity-js/assertions";
 
-export const goToElementsCardTask = (): Task =>
-  Task.where("#actor go to elements tab", Click.on(cardElements()));
+export const taskGoToElementsCard = (): Task =>
+  Task.where("#actor go to elements card", Click.on(cardElements()));
 
-export const goToWebTablesTabTask = (): Task =>
+export const taskGoToWebTablesTab = (): Task =>
   Task.where("#actor go to Web Tables tab", Click.on(webTablesTab()));
 
 export const addRecordTask = (record: Answerable<any>): Task =>
@@ -63,7 +76,7 @@ export const taskRemoveRecord = (index: Answerable<number>): Task => {
 };
 
 export const taskGoToWidgetsCard = (): Task =>
-  Task.where("#actor go to Widgets tab", Click.on(cardWidgets()));
+  Task.where("#actor go to Widgets card", Click.on(cardWidgets()));
 
 export const taskGoToDatePickerTab = (): Task =>
   Task.where("#actor go to Date Picker tab", Click.on(datePickerTab()));
@@ -98,3 +111,48 @@ export const taskSelectDateTime = (dateData: Answerable<any>): Task => {
     Click.on(selectDateTimeTime(dateData.time))
   );
 };
+
+export const taskGoToAlertsFrameWindowsCard = (): Task =>
+  Task.where("#actor go to Widgets tab", Click.on(cardAlertFrameWindows()));
+
+export const taskGoToAlertsTab = (): Task =>
+  Task.where("#actor go to Alerts tab", Click.on(alertsTab()));
+
+export const taskClickSeeModalDialogButton = (): Task =>
+  Task.where(
+    "#actor do click on See Alert Button",
+    Click.on(buttonSeeModalDialog()),
+    Wait.until(ModalDialog, isPresent())
+  );
+
+export const taskClickTimerModalDialogButton = (): Task =>
+  Task.where(
+    "#actor do click on Timer Alert Button",
+    Click.on(buttonTimerModalDialog()),
+    Wait.until(ModalDialog, isPresent())
+  );
+
+export const taskClickConfirmModalDialogButton = (
+  modalOption: Answerable<string>
+): Task =>
+  Task.where(
+    "#actor do click on Confirm Alert Button",
+    interactionSelectModalDialog(modalOption as string),
+    Click.on(buttonConfirmModalDialog()),
+    Wait.until(ModalDialog, isPresent())
+  );
+
+export const taskClickPromptModalDialogButton = (
+  prompt: Answerable<string>
+): Task =>
+  Task.where(
+    "#actor do click on Prompt Alert Button",
+    ModalDialog.acceptNextWithValue(prompt),
+    Click.on(buttonPromptModalDialog()),
+    Wait.until(ModalDialog, isPresent())
+  );
+/*export const taskClickAcceptNextModalDialog = (): Task =>
+  Task.where(
+    "#actor do click on See Alert Button",
+    Click.on(ModalDialog.acceptNext())
+  );*/
