@@ -1,8 +1,7 @@
-import {Ensure} from "@serenity-js/assertions";
-import {Answerable, d, Task} from "@serenity-js/core";
-import {Click, Enter} from "@serenity-js/web";
-import {webTables} from "./screens/elements.screen";
-import {cardElements} from "./screens/home.screen";
+import {Answerable, Task} from "@serenity-js/core";
+import {Click, Enter, Select} from "@serenity-js/web";
+import {webTablesTab} from "./screens/elements.screen";
+import {cardElements, cardWidgets} from "./screens/home.screen";
 import {
   buttonSubmit,
   inputAge,
@@ -16,15 +15,33 @@ import {
   buttonAddRecord,
   buttonRemoveRecordByIndex,
 } from "./screens/webTables.screen";
-import {persistedNameRecordById} from "./questions";
+import {datePickerTab} from "./screens/widgets.screen";
+import {getDateParts, getDateTimeParts} from "./utils/support-factory.utils";
+import {
+  selectDateDay,
+  selectDateMonth,
+  selectDateYear,
+} from "./screens/calendarSelectDate.screen";
+import {
+  inputDateAndTimePicker,
+  inputDatePickerMonthYear,
+} from "./screens/datePicker.screen";
+import {
+  interactionSelectDateTimeMonth,
+  interactionSelectDateTimeYear,
+} from "./interactions";
+import {
+  selectDateTimeDay,
+  selectDateTimeTime,
+} from "./screens/calendarSelectDateTime.screen";
 
-export const goToElementsTab = (): Task =>
+export const goToElementsCardTask = (): Task =>
   Task.where("#actor go to elements tab", Click.on(cardElements()));
 
-export const goToWebTablesTab = (): Task =>
-  Task.where("#actor go to Web Tables tab", Click.on(webTables()));
+export const goToWebTablesTabTask = (): Task =>
+  Task.where("#actor go to Web Tables tab", Click.on(webTablesTab()));
 
-export const addRecord = (record: Answerable<any>): Task =>
+export const addRecordTask = (record: Answerable<any>): Task =>
   Task.where(
     "#actor add a new record",
     Click.on(buttonAddRecord()),
@@ -37,10 +54,50 @@ export const addRecord = (record: Answerable<any>): Task =>
     Click.on(buttonSubmit())
   );
 
-export const removeRecord = (index: Answerable<number>): Task => {
+export const taskRemoveRecord = (index: Answerable<number>): Task => {
   const i = (index as number) + 1;
   return Task.where(
     `#actor remove record number ${i}`,
     Click.on(buttonRemoveRecordByIndex(i))
+  );
+};
+
+export const taskGoToWidgetsCard = (): Task =>
+  Task.where("#actor go to Widgets tab", Click.on(cardWidgets()));
+
+export const taskGoToDatePickerTab = (): Task =>
+  Task.where("#actor go to Date Picker tab", Click.on(datePickerTab()));
+
+export const taskSelectDate = (date: Answerable<string>): Task => {
+  const fullDate = getDateParts(date as string);
+  return Task.where(
+    `#actor select date ${date}`,
+    Click.on(inputDatePickerMonthYear()),
+    Select.value(fullDate.year as string).from(selectDateYear()),
+    Select.value(fullDate.month as string).from(selectDateMonth()),
+    Click.on(selectDateDay(fullDate.day as string))
+  );
+};
+
+export const taskSelectDateAndTime = (date: Answerable<string>): Task => {
+  const fullDate = getDateParts(date as string);
+  return Task.where(
+    `#actor select date ${date}`,
+    Click.on(inputDateAndTimePicker()),
+    Select.value(fullDate.year as string).from(selectDateYear()),
+    Select.value(fullDate.month as string).from(selectDateMonth()),
+    Click.on(selectDateDay(fullDate.day as string))
+  );
+};
+
+export const taskSelectDateTime = (date: Answerable<string>): Task => {
+  const fullDate = getDateTimeParts(date as string);
+  return Task.where(
+    `#actor select date ${date}`,
+    Click.on(inputDateAndTimePicker()),
+    interactionSelectDateTimeYear(fullDate.year),
+    interactionSelectDateTimeMonth(fullDate.month),
+    Click.on(selectDateTimeDay(fullDate.day)),
+    Click.on(selectDateTimeTime(fullDate.time))
   );
 };

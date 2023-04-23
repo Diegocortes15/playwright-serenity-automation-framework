@@ -1,6 +1,6 @@
 import {By, PageElement} from "@serenity-js/web";
 
-export const webTables = () =>
+export const webTablesTab = () =>
   PageElement.located(
     By.xpath(
       "//span[text()='Web Tables']/parent::li"
