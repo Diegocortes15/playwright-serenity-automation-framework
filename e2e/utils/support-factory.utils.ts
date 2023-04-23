@@ -5,8 +5,12 @@ export const getRandomPositiveNumber = async (max: number): Promise<number> =>
 
 export const getDateParts = (dateString: string) => {
   const dateParts = dateString.split("/");
-  const day = Number(dateParts[1]).toString();
-  const month = Number(parseInt(dateParts[0]) - 1).toString();
+  const day = (
+    Number(dateParts[1]) <= 0 ? Number(dateParts[1] + 1) : Number(dateParts[1])
+  ).toString();
+  const month = (
+    Number(dateParts[0]) <= 0 ? Number(dateParts[0] + 1) : Number(dateParts[0])
+  ).toString();
   const year = Number(dateParts[2]).toString();
   const fullDate = `${month.padStart(2, "0")}/${day.padStart(2, "0")}/${year}`;
   return {
