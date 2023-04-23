@@ -2,7 +2,7 @@
   "testCase": "HB-0013",
   "testSummary": "Verify alert prompt box",
   "testDescription": "Verify alert prompt return a message with the text entered",
-  "actor": "User Actor",
+  "actor": "modalDialog User",
   "tags": "@regression @sprint1 @hb-0008 @hb-0013",
   "modalDialog": {
     "prompt": "Diego Cortes"

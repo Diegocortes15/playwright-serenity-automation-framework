@@ -2,8 +2,8 @@
   "testCase": "HB-0009",
   "testSummary": "Verify button to see alert",
   "testDescription": "Verify button to see alert",
-  "actor": "User Actor",
-  "tags": "@regression @sprint2 @hb-0008 @hb-0009",
+  "actor": "modalDialog User",
+  "tags": "@regression @sprint1 @hb-0008 @hb-0009",
   "modalDialog": {
     "message": "You clicked a button"
   }

@@ -68,9 +68,9 @@ describe("Manage Alerts", () => {
   );
   it(`Test case: ${testDataTestCase_3["testCase"]} |
   Description: ${testDataTestCase_3["testDescription"]} |
-  Tags: ${testDataTestCase_3["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_3["tags"]}`, async ({actorCalled}) => {
     const data = await testDataTestCase_3;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToAlertsFrameWindowsCard(),
       taskGoToAlertsTab(),
@@ -87,9 +87,9 @@ describe("Manage Alerts", () => {
   );
   it(`Test case: ${testDataTestCase_4["testCase"]} |
   Description: ${testDataTestCase_4["testDescription"]} |
-  Tags: ${testDataTestCase_4["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_4["tags"]}`, async ({actorCalled}) => {
     const data = await testDataTestCase_4;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToAlertsFrameWindowsCard(),
       taskGoToAlertsTab(),
@@ -106,9 +106,9 @@ describe("Manage Alerts", () => {
   );
   it(`Test case: ${testDataTestCase_5["testCase"]} |
   Description: ${testDataTestCase_5["testDescription"]} |
-  Tags: ${testDataTestCase_5["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_5["tags"]}`, async ({actorCalled}) => {
     const data = await testDataTestCase_5;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToAlertsFrameWindowsCard(),
       taskGoToAlertsTab(),

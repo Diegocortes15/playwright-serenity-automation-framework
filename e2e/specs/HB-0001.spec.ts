@@ -10,6 +10,7 @@ import {
 import {questionNameRecordById, questionNameRecords} from "../questions";
 import {readFileSync} from "fs";
 import {getRandomPositiveNumber} from "../utils/support-factory.utils";
+import {actorInTheSpotlight} from "@serenity-js/core";
 
 describe("Manage Web Tables", () => {
   const storyParentId = "HB-0001";
@@ -19,9 +20,9 @@ describe("Manage Web Tables", () => {
   );
   it(`Test case: ${testDataTestCase_1["testCase"]} |
   Description: ${testDataTestCase_1["testDescription"]} |
-  Tags: ${testDataTestCase_1["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_1["tags"]}`, async ({actorCalled}) => {
     const data = await testDataTestCase_1;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToElementsCard(),
       taskGoToWebTablesTab(),
@@ -35,19 +36,20 @@ describe("Manage Web Tables", () => {
   );
   it(`Test case: ${testDataTestCase_2["testCase"]} |
   Description: ${testDataTestCase_2["testDescription"]} |
-  Tags: ${testDataTestCase_2["tags"]}`, async ({actor}) => {
-    await actor.attemptsTo(
+  Tags: ${testDataTestCase_2["tags"]}`, async ({actorCalled}) => {
+    const data = await testDataTestCase_2;
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToElementsCard(),
       taskGoToWebTablesTab()
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
-      await questionNameRecords().length.answeredBy(actor)
+      await questionNameRecords().length.answeredBy(actorInTheSpotlight())
     );
     const recordName = await questionNameRecordById(
       recordIdToRemoveBy
-    ).answeredBy(actor);
-    await actor.attemptsTo(
+    ).answeredBy(actorInTheSpotlight());
+    await actorInTheSpotlight().attemptsTo(
       taskRemoveRecord(recordIdToRemoveBy),
       Ensure.that(questionNameRecords(), not(contain(recordName)))
     );
@@ -58,9 +60,9 @@ describe("Manage Web Tables", () => {
   );
   it(`Test case: ${testDataTestCase_3["testCase"]} |
   Description: ${testDataTestCase_3["testDescription"]} |
-  Tags: ${testDataTestCase_3["tags"]}`, async ({actor}) => {
+  Tags: ${testDataTestCase_3["tags"]}`, async ({actorCalled}) => {
     const data = await testDataTestCase_3;
-    await actor.attemptsTo(
+    await actorCalled(data.actor).attemptsTo(
       Navigate.to("/"),
       taskGoToElementsCard(),
       taskGoToWebTablesTab(),
@@ -68,12 +70,12 @@ describe("Manage Web Tables", () => {
       Ensure.that(questionNameRecords(), contain(data.recordInfo.firstName))
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
-      await questionNameRecords().length.answeredBy(actor)
+      await questionNameRecords().length.answeredBy(actorInTheSpotlight())
     );
     const recordName = await questionNameRecordById(
       recordIdToRemoveBy
-    ).answeredBy(actor);
-    await actor.attemptsTo(
+    ).answeredBy(actorInTheSpotlight());
+    await actorCalled(data.actor).attemptsTo(
       taskRemoveRecord(recordIdToRemoveBy),
       Ensure.that(questionNameRecords(), not(contain(recordName)))
     );
