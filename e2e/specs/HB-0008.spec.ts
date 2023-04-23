@@ -22,7 +22,7 @@ import {
   questionResultPromptModalDialog,
 } from "../questions";
 
-describe("Date Picker Widget", () => {
+describe("Manage Alerts", () => {
   const storyParentId = "HB-0008";
 
   const testDataTestCase_1 = JSON.parse(
