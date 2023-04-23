@@ -56,6 +56,15 @@ To open serenity report
 npm run test:report
 ```
 
+To clean old serenity reports
+
+```bash
+npm run clean
+```
+
+> **Note**
+> If you are using _`npm run test:execute`_ or _`npm run test`_, this command is required.
+
 To run test cases by tags
 
 ```bash
