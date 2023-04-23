@@ -46,7 +46,6 @@ describe("Date Picker Widget", () => {
     const dateFormat = "LLL";
     const dateDataTime = await getRandomDateTime(dateFormat);
     const expectedDate = dateDataTime.fullDate;
-    //const expectedDate = "January 27, 1994 12:30 AM";
     await actor.attemptsTo(
       Navigate.to("/"),
       taskGoToWidgetsCard(),
