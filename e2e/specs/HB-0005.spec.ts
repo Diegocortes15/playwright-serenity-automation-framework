@@ -25,12 +25,13 @@ describe("Date Picker Widget", () => {
   Description: ${testDataTestCase_1["testDescription"]} |
   Tags: ${testDataTestCase_1["tags"]}`, async ({actor}) => {
     const dateFormat = "MM/DD/YYYY";
-    const expectedDate = await getRandomDate(dateFormat);
+    const dateData = await getRandomDate(dateFormat);
+    const expectedDate = dateData.fullDate;
     await actor.attemptsTo(
       Navigate.to("/"),
       taskGoToWidgetsCard(),
       taskGoToDatePickerTab(),
-      taskSelectDate(expectedDate)
+      taskSelectDate(dateData)
     );
     const currentDate = await persistedDate().answeredBy(actor);
     await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));
@@ -43,13 +44,14 @@ describe("Date Picker Widget", () => {
   Description: ${testDataTestCase_2["testDescription"]} |
   Tags: ${testDataTestCase_2["tags"]}`, async ({actor}) => {
     const dateFormat = "LLL";
-    const expectedDate = await getRandomDateTime(dateFormat);
+    const dateDataTime = await getRandomDateTime(dateFormat);
+    const expectedDate = dateDataTime.fullDate;
     //const expectedDate = "January 27, 1994 12:30 AM";
     await actor.attemptsTo(
       Navigate.to("/"),
       taskGoToWidgetsCard(),
       taskGoToDatePickerTab(),
-      taskSelectDateTime(expectedDate)
+      taskSelectDateTime(dateDataTime)
     );
     const currentDate = await persistedDateTime().answeredBy(actor);
     await actor.attemptsTo(Ensure.that(currentDate, equals(expectedDate)));

@@ -68,36 +68,33 @@ export const taskGoToWidgetsCard = (): Task =>
 export const taskGoToDatePickerTab = (): Task =>
   Task.where("#actor go to Date Picker tab", Click.on(datePickerTab()));
 
-export const taskSelectDate = (date: Answerable<string>): Task => {
-  const fullDate = getDateParts(date as string);
+export const taskSelectDate = (dateData: Answerable<any>): Task => {
   return Task.where(
-    `#actor select date ${date}`,
+    `#actor select date ${dateData.fullDate}`,
     Click.on(inputDatePickerMonthYear()),
-    Select.value(fullDate.year as string).from(selectDateYear()),
-    Select.value(fullDate.month as string).from(selectDateMonth()),
-    Click.on(selectDateDay(fullDate.day as string))
+    Select.value(dateData.year).from(selectDateYear()),
+    Select.value(dateData.month).from(selectDateMonth()),
+    Click.on(selectDateDay(dateData.day))
   );
 };
 
-export const taskSelectDateAndTime = (date: Answerable<string>): Task => {
-  const fullDate = getDateParts(date as string);
+export const taskSelectDateAndTime = (dateData: Answerable<any>): Task => {
   return Task.where(
-    `#actor select date ${date}`,
+    `#actor select date ${dateData.fullDate}`,
     Click.on(inputDateAndTimePicker()),
-    Select.value(fullDate.year as string).from(selectDateYear()),
-    Select.value(fullDate.month as string).from(selectDateMonth()),
-    Click.on(selectDateDay(fullDate.day as string))
+    Select.value(dateData.year).from(selectDateYear()),
+    Select.value(dateData.month).from(selectDateMonth()),
+    Click.on(selectDateDay(dateData.day))
   );
 };
 
-export const taskSelectDateTime = (date: Answerable<string>): Task => {
-  const fullDate = getDateTimeParts(date as string);
+export const taskSelectDateTime = (dateData: Answerable<any>): Task => {
   return Task.where(
-    `#actor select date ${date}`,
+    `#actor select date ${dateData.fullDate}`,
     Click.on(inputDateAndTimePicker()),
-    interactionSelectDateTimeYear(fullDate.year),
-    interactionSelectDateTimeMonth(fullDate.month),
-    Click.on(selectDateTimeDay(fullDate.day)),
-    Click.on(selectDateTimeTime(fullDate.time))
+    interactionSelectDateTimeYear(dateData.year),
+    interactionSelectDateTimeMonth(dateData.month),
+    Click.on(selectDateTimeDay(dateData.day)),
+    Click.on(selectDateTimeTime(dateData.time))
   );
 };
