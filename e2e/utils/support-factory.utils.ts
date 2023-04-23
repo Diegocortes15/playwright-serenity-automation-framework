@@ -31,11 +31,11 @@ export const getDateTimeParts = (dateString: string) => {
     .padStart(2, "0");
   const meridian = dateString.toString().includes("PM") ? "PM" : "AM";
   // Adjust the hour value for PM times
-  if (Number(hours) < 12) {
+  if (Number(hours) < 12 && meridian === "AM") {
     hoursFormat = Number(hours).toString();
-  } else if (Number(hours) === 0) {
-    hoursFormat = (Number(hoursFormat) + 12).toString();
-  } else if (Number(hours) > 12) {
+  } else if (Number(hours) === 0 && meridian === "AM") {
+    hoursFormat = (12).toString();
+  } else if (Number(hours) > 12 && meridian === "PM") {
     hoursFormat = (Number(hoursFormat) - 12).toString();
   }
 

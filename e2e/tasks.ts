@@ -1,4 +1,4 @@
-import {Answerable, Task, Wait} from "@serenity-js/core";
+import {Answerable, Task, Wait, actorInTheSpotlight} from "@serenity-js/core";
 import {Click, Enter, ModalDialog, Select} from "@serenity-js/web";
 import {webTablesTab} from "./screens/elements.screen";
 import {
@@ -34,6 +34,7 @@ import {
   interactionSelectDateTimeMonth,
   interactionSelectDateTimeYear,
   interactionSelectModalDialog,
+  interactionWaitModalDialogVisible,
 } from "./interactions";
 import {
   selectDateTimeDay,
@@ -122,14 +123,14 @@ export const taskClickSeeModalDialogButton = (): Task =>
   Task.where(
     "#actor do click on See Alert Button",
     Click.on(buttonSeeModalDialog()),
-    Wait.until(ModalDialog, isPresent())
+    interactionWaitModalDialogVisible()
   );
 
 export const taskClickTimerModalDialogButton = (): Task =>
   Task.where(
     "#actor do click on Timer Alert Button",
     Click.on(buttonTimerModalDialog()),
-    Wait.until(ModalDialog, isPresent())
+    interactionWaitModalDialogVisible()
   );
 
 export const taskClickConfirmModalDialogButton = (
@@ -139,7 +140,7 @@ export const taskClickConfirmModalDialogButton = (
     "#actor do click on Confirm Alert Button",
     interactionSelectModalDialog(modalOption as string),
     Click.on(buttonConfirmModalDialog()),
-    Wait.until(ModalDialog, isPresent())
+    interactionWaitModalDialogVisible()
   );
 
 export const taskClickPromptModalDialogButton = (
@@ -149,10 +150,5 @@ export const taskClickPromptModalDialogButton = (
     "#actor do click on Prompt Alert Button",
     ModalDialog.acceptNextWithValue(prompt),
     Click.on(buttonPromptModalDialog()),
-    Wait.until(ModalDialog, isPresent())
+    interactionWaitModalDialogVisible()
   );
-/*export const taskClickAcceptNextModalDialog = (): Task =>
-  Task.where(
-    "#actor do click on See Alert Button",
-    Click.on(ModalDialog.acceptNext())
-  );*/
