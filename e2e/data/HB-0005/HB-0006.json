@@ -1,0 +1,7 @@
+{
+  "testCase": "HB-0006",
+  "testSummary": "Verify selects a date from a date picker",
+  "testDescription": "Verify selects a date from a date picker",
+  "actor": "User Actor",
+  "tags": "@regression @sprint2 @hb-0005 @hb-0006"
+}

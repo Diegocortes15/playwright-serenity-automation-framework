@@ -2,10 +2,10 @@ import {describe, it} from "@serenity-js/playwright-test";
 import {Navigate} from "@serenity-js/web";
 import {contain, Ensure, not} from "@serenity-js/assertions";
 import {
-  addRecord,
-  goToElementsTab,
-  goToWebTablesTab,
-  removeRecord,
+  addRecordTask,
+  goToElementsCardTask,
+  goToWebTablesTabTask,
+  taskRemoveRecord,
 } from "../tasks";
 import {persistedNameRecordById, persistedNameRecords} from "../questions";
 import {readFileSync} from "fs";
@@ -23,9 +23,9 @@ describe("Manage Web Tables", () => {
     const data = await testDataTestCase_1;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsTab(),
-      goToWebTablesTab(),
-      addRecord(data.recordInfo),
+      goToElementsCardTask(),
+      goToWebTablesTabTask(),
+      addRecordTask(data.recordInfo),
       Ensure.that(persistedNameRecords(), contain(data.recordInfo.firstName))
     );
   });
@@ -39,8 +39,8 @@ describe("Manage Web Tables", () => {
     const data = await testDataTestCase_2;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsTab(),
-      goToWebTablesTab()
+      goToElementsCardTask(),
+      goToWebTablesTabTask()
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
       await persistedNameRecords().length.answeredBy(actor)
@@ -49,7 +49,7 @@ describe("Manage Web Tables", () => {
       recordIdToRemoveBy
     ).answeredBy(actor);
     await actor.attemptsTo(
-      removeRecord(recordIdToRemoveBy),
+      taskRemoveRecord(recordIdToRemoveBy),
       Ensure.that(persistedNameRecords(), not(contain(recordName)))
     );
   });
@@ -63,9 +63,9 @@ describe("Manage Web Tables", () => {
     const data = await testDataTestCase_3;
     await actor.attemptsTo(
       Navigate.to("/"),
-      goToElementsTab(),
-      goToWebTablesTab(),
-      addRecord(data.recordInfo),
+      goToElementsCardTask(),
+      goToWebTablesTabTask(),
+      addRecordTask(data.recordInfo),
       Ensure.that(persistedNameRecords(), contain(data.recordInfo.firstName))
     );
     const recordIdToRemoveBy: any = await getRandomPositiveNumber(
@@ -75,7 +75,7 @@ describe("Manage Web Tables", () => {
       recordIdToRemoveBy
     ).answeredBy(actor);
     await actor.attemptsTo(
-      removeRecord(recordIdToRemoveBy),
+      taskRemoveRecord(recordIdToRemoveBy),
       Ensure.that(persistedNameRecords(), not(contain(recordName)))
     );
   });

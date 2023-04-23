@@ -1,6 +1,11 @@
 import {Answerable, QuestionAdapter} from "@serenity-js/core";
 import {webTableRecords} from "./screens/webTables.screen";
-import {Text} from "@serenity-js/web";
+import {Text, Value} from "@serenity-js/web";
+import {
+  inputDateAndTimePicker,
+  inputDatePickerMonthYear,
+} from "./screens/datePicker.screen";
+import {optionsDateTimeYear} from "./screens/calendarSelectDateTime.screen";
 
 export const persistedRecords = () =>
   webTableRecords().count() as QuestionAdapter<number>;
@@ -15,3 +20,16 @@ export const persistedNameRecordById = (index: Answerable<number>) => {
     index as number
   ] as QuestionAdapter<string>;
 };
+
+export const persistedDate = () =>
+  Value.of(inputDatePickerMonthYear()).describedAs(
+    "Selected Date Value"
+  ) as QuestionAdapter<string>;
+
+export const persistedDateTimeYear = (year: Answerable<string>) =>
+  optionsDateTimeYear(year).count() as QuestionAdapter<number>;
+
+export const persistedDateTime = () =>
+  Value.of(inputDateAndTimePicker()).describedAs(
+    "Selected Date and Time Value"
+  ) as QuestionAdapter<string>;
