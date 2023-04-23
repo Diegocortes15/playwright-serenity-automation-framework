@@ -4,7 +4,7 @@
   "description": "Habi Automation Challenge",
   "main": "index.js",
   "scripts": {
-    "postinstall": "serenity-bdd update",
+    "postinstall": "npm install rimraf && serenity-bdd update",
     "clean": "rimraf playwright-report target test-results",
     "test": "npm run clean && npm run test:execute && npm run test:report",
     "test:execute": "npm run clean && npx playwright test",

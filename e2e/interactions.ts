@@ -1,4 +1,4 @@
-import {Interaction, actorInTheSpotlight} from "@serenity-js/core";
+import {Interaction, Wait, actorInTheSpotlight} from "@serenity-js/core";
 import {getCurrentYear} from "./utils/support-factory.utils";
 import {questionDateTimeYear} from "./questions";
 import {
@@ -9,7 +9,8 @@ import {
   selectDateTimeMonth,
   selectDateTimeYear,
 } from "./screens/calendarSelectDateTime.screen";
-import {Click, ModalDialog} from "@serenity-js/web";
+import {Click, ModalDialog, isVisible} from "@serenity-js/web";
+import {isPresent} from "@serenity-js/assertions";
 
 export const interactionSelectDateTimeYear = (year: string): Interaction => {
   return Interaction.where(`#actor select year ${year}`, async () => {
@@ -73,4 +74,15 @@ export const interactionSelectModalDialog = (
       throw new Error(`Invalid modal option: ${modalOption}\t${error.message}`);
     }
   });
+};
+
+export const interactionWaitModalDialogVisible = (): Interaction => {
+  return Interaction.where(
+    `#actor wait until ModalDialog will be visible`,
+    async () => {
+      await Wait.until(ModalDialog, isPresent()).performAs(
+        actorInTheSpotlight()
+      );
+    }
+  );
 };
