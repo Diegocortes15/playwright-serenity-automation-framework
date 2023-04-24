@@ -19,11 +19,11 @@ jobs:
 
   - script: |
       npm ci
-  - displayName: 'Install dependecies'
+    displayName: 'Install dependecies'
 
   - script: |
       npm install rimraf
-  - displayName: 'Install rimraf'
+    displayName: 'Install rimraf'
 
   - script: |
       npx playwright install --with-deps
