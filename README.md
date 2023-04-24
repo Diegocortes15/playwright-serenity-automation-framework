@@ -133,3 +133,5 @@ pipeline {
 ```
 
 ### Pipeline in Jenkins
+
+![image](https://user-images.githubusercontent.com/60171460/233922016-90c5e823-4ca6-4c9a-97b2-d8d97b54b8f2.png)
