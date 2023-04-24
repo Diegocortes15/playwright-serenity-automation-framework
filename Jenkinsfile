@@ -1,13 +1,19 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright:v1.32.0-focal' } }
+   agent {
+      docker {
+         image 'mcr.microsoft.com/playwright:v1.32.3-focal'
+      }
+   }
    stages {
-      stage('Install dependencies') {
+      stage('install dependencies') {
          steps {
-            sh 'npm install'
-            sh 'Install rimraf'
+            sh '''
+            npm install
+            install rimraf
+            '''
          }
       }
-      stage('Run tests') {
+      stage('run tests') {
          steps {
             sh 'npm run test:execute'
          }
