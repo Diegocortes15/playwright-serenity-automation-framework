@@ -1,3 +1,4 @@
+/* groovylint-disable SpaceAfterClosingBrace */
 pipeline {
    agent any
 
@@ -22,7 +23,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'target/site/serenityports',
+                    reportDir: 'target/site/serenity',
                     reportFiles: 'index.html',
                     reportName: 'Serenity'
                 ])
