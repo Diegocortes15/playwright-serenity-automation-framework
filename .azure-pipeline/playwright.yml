@@ -1,0 +1,39 @@
+trigger:
+- main
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Test
+  timeoutInMinutes: 60
+  pool:
+      vmImage: "ubuntu-latest"
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '16.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm ci
+  - displayName: 'Install dependecies'
+
+  - script: |
+      npm install rimraf
+  - displayName: 'Install rimraf'
+
+  - script: |
+      npx playwright install --with-deps
+    displayName: 'Install Playwright Browsers'
+
+  - script: |
+      npm run test:execute
+    displayName: "Run Playwright tests"
+
+  - publish: $(System.DefaultWorkingDirectory)/target/site/serenity
+    artifact: serenity-report
+
+    condition: always()
