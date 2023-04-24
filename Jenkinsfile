@@ -22,7 +22,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'retarget/site/serenityports',
+                    reportDir: 'target/site/serenityports',
                     reportFiles: 'index.html',
                     reportName: 'Serenity'
                 ])
