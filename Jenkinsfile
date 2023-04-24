@@ -6,7 +6,7 @@ pipeline {
    stages {
       stage('install dependencies') {
          steps {
-            sh 'npm install '
+            sh 'npm ci'
          }
       }
       stage('install rimraf') {
