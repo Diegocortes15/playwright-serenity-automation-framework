@@ -3,7 +3,7 @@ pipeline {
    stages {
       stage('install dependencies') {
          steps {
-            sh 'npm install && install rimraf'
+            sh 'npm install && npm install rimraf'
          }
       }
       stage('run tests') {
