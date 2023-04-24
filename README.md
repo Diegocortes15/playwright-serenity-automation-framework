@@ -1,4 +1,4 @@
-# habi-automation-challenge
+# Habi Automation Challenge
 
 Habi Automation Challenge - Screenplay
 
@@ -40,7 +40,7 @@ Run, the following command to set some depencies needed after install like `rimr
 npm run postinstall
 ```
 
-## Running the tests
+## Running Tests
 
 To run all tests and open serenity report
 
@@ -93,3 +93,43 @@ Tags that you can use
 | 3️⃣ @hb-0011  |             |                |
 | 3️⃣ @hb-0012  |             |                |
 | 3️⃣ @hb-0013  |             |                |
+
+## Jenkins Pipeline
+
+```bash
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'NodeJS 17.5.0'
+    }
+    stages {
+        stage('Dependencies') {
+            steps {
+                bat 'npm ci'
+                bat 'npm install rimraf'
+            }
+        }
+        stage('e2e Tests') {
+            steps {
+                bat 'npm run test:execute'
+            }
+        }
+        stage('Deploy Test Reports') {
+            steps {
+                publishHTML([
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: true,
+                  keepAll: false,
+                  reportDir: 'target/site/serenity',
+                  reportFiles: 'index.html',
+                  reportName: 'Serenity Report',
+                  reportTitles: '',
+                  useWrapperFileDirectly: true])
+            }
+        }
+    }
+}
+```
+
+### Pipeline in Jenkins
