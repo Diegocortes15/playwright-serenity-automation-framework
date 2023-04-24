@@ -1,24 +1,32 @@
 pipeline {
-    agent any
+   agent any
 
-    tools {
-        nodejs 'NodeJS 17.5.0'
-    }
-    stages {
-        stage('install dependencies') {
+   tools {
+      nodejs 'NodeJS 17.5.0'
+   }
+   stages {
+      stage('Dependencies') {
             steps {
-                bat 'npm ci'
+            bat 'npm ci'
+            bat 'npm install rimraf'
             }
-        }
-        stage('install rimraf') {
+      }
+      stage('e2e Tests') {
             steps {
-                bat 'npm install rimraf'
+            bat 'npm run test:execute'
             }
-        }
-        stage('run tests') {
+      }
+      stage('Deploy Test Reports') {
             steps {
-                bat 'npm run test:execute'
+            publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'retarget/site/serenityports',
+                    reportFiles: 'index.html',
+                    reportName: 'Serenity'
+                ])
             }
-        }
-    }
+      }
+   }
 }
