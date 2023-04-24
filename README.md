@@ -47,6 +47,7 @@ To run all tests and open serenity report
 ```bash
 npm run test
 ```
+
 At the end, will be generated a serenity report like this
 
 ![serenityReport](https://user-images.githubusercontent.com/60171460/233871291-4bc7ae00-3230-4472-887b-483e662eb037.gif)

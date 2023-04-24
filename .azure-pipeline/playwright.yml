@@ -12,28 +12,28 @@ jobs:
       vmImage: "ubuntu-latest"
 
   steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '16.x'
-    displayName: 'Install Node.js'
+    - task: NodeTool@0
+      inputs:
+        versionSpec: "16.x"
+      displayName: "Install Node.js"
 
-  - script: |
-      npm ci
-    displayName: 'Install dependecies'
+    - script: |
+        npm ci
+      displayName: "Install dependencies"
 
-  - script: |
-      npm install rimraf
-    displayName: 'Install rimraf'
+    - script: |
+        npm install rimraf
+      displayName: 'Install rimraf'
 
-  - script: |
-      npx playwright install --with-deps
-    displayName: 'Install Playwright Browsers'
+    - script: |
+        npx playwright install --with-deps
+      displayName: 'Install Playwright Browsers'
 
-  - script: |
-      npm run test:execute
-    displayName: "Run Playwright tests"
+    - script: |
+        npm run test:execute
+      displayName: "Run Playwright tests"
 
-  - publish: $(System.DefaultWorkingDirectory)/target/site/serenity
-    artifact: serenity-report
+    - publish: $(System.DefaultWorkingDirectory)/target/site/serenity
+      artifact: serenity-report
 
-    condition: always()
+      condition: always()
