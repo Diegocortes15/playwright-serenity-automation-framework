@@ -7,8 +7,8 @@
     "postinstall": "npm install rimraf && serenity-bdd update",
     "clean": "rimraf playwright-report target test-results",
     "test": "npm run clean && npm run test:execute && npm run test:report",
-    "test:execute": "npm run clean && npx playwright test",
-    "test:report": "npx serenity-bdd run && npx playwright show-report target/site/serenity"
+    "test:execute": "npm run clean && npx playwright test && npx serenity-bdd run",
+    "test:report": "npx playwright show-report target/site/serenity"
   },
   "keywords": [],
   "author": "Diego Cortes <Diego Alejandro Cortes Roa>",
@@ -24,6 +24,7 @@
     "@serenity-js/web": "^3.1.6",
     "casual": "^1.6.2",
     "fs": "^0.0.1-security",
-    "playwright": "^1.32.3"
+    "playwright": "^1.32.3",
+    "rimraf": "^5.0.0"
   }
 }
