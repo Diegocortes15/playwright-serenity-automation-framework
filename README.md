@@ -1,6 +1,4 @@
-# Habi Automation Challenge
-
-Habi Automation Challenge - Screenplay
+# Playwright SerenityJS Automation Framework
 
 ## Technologies Used
 
